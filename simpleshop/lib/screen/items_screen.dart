@@ -13,6 +13,8 @@ class ItemsScreen extends StatefulWidget {
 }
 
 class _ItemsScreenState extends State<ItemsScreen> {
+  var value = 1;
+
   final List<Item> _items = [
     Item(
       title: 'Shoes',
@@ -45,8 +47,6 @@ class _ItemsScreenState extends State<ItemsScreen> {
           'https://4.imimg.com/data4/LL/TW/MY-33084776/men-s-shirt-500x500.jpg',
     ),
   ];
-  var value = 1;
-
   void onadd() {
     ++value;
   }
@@ -68,45 +68,10 @@ class _ItemsScreenState extends State<ItemsScreen> {
             Expanded(
               child: ListView.builder(
                 itemCount: _items.length,
-                itemBuilder: (_, index) =>
-                    ItemWidget(_items[index].title, _items[index].imgUrl),
+                itemBuilder: (_, index) => ItemWidget(_items[index].title,
+                    _items[index].imgUrl, value, onadd, onremove),
               ),
             ),
-            Expanded(
-                child: Row(
-              children: [
-                Expanded(
-                  child: FloatingActionButton(
-                    mini: true,
-                    onPressed: () => onadd(),
-                    child: Icon(Icons.add),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Text(
-                    '$value',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 30,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: FloatingActionButton(
-                    mini: true,
-                    onPressed: () => onremove(),
-                    child: Icon(Icons.remove),
-                  ),
-                ),
-              ],
-            ))
           ],
         ),
       ),

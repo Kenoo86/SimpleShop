@@ -3,12 +3,25 @@ import 'package:flutter/material.dart';
 class ItemWidget extends StatelessWidget {
   final String title;
   final String imgUrl;
-  const ItemWidget(this.title, this.imgUrl, {Key? key}) : super(key: key);
+  final int value;
+  final Function onadd;
+  final Function onremove;
+  const ItemWidget(
+      this.title, this.imgUrl, this.value, this.onadd, this.onremove,
+      {Key? key})
+      : super(key: key);
+
+  void onadd() {
+    ++value;
+  }
+
+  void onremove() {
+    --value;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
+    return Card(
         child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
