@@ -7,17 +7,9 @@ class ItemWidget extends StatelessWidget {
   final Function onadd;
   final Function onremove;
   const ItemWidget(
-      this.title, this.imgUrl, this.value, this.onadd, this.onremove,
+      this.title, this.imgUrl, this.onadd, this.value, this.onremove,
       {Key? key})
       : super(key: key);
-
-  void onadd() {
-    ++value;
-  }
-
-  void onremove() {
-    --value;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +45,45 @@ class ItemWidget extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Expanded(
-                  child: Image.network(
-                    '${imgUrl}',
-                  ),
+                Image.network(
+                  '${imgUrl}',
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FloatingActionButton(
+                      backgroundColor: Colors.white,
+                      mini: true,
+                      onPressed: () => onadd(),
+                      child: Icon(Icons.add),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '$value',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 30,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    FloatingActionButton(
+                      backgroundColor: Colors.white,
+                      mini: true,
+                      onPressed: () => onremove(),
+                      child: Icon(
+                        Icons.remove,
+                      ),
+                    ),
+                  ],
+                )
               ],
             )));
   }

@@ -48,11 +48,15 @@ class _ItemsScreenState extends State<ItemsScreen> {
     ),
   ];
   void onadd() {
-    ++value;
+    setState(() {
+      ++value;
+    });
   }
 
   void onremove() {
-    --value;
+    setState(() {
+      --value;
+    });
   }
 
   @override
@@ -69,7 +73,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
               child: ListView.builder(
                 itemCount: _items.length,
                 itemBuilder: (_, index) => ItemWidget(_items[index].title,
-                    _items[index].imgUrl, value, onadd, onremove),
+                    _items[index].imgUrl, onadd, value, onremove),
               ),
             ),
           ],
