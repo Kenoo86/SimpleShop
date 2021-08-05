@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../models/item.dart';
 //Widgets
 import '../widget/item_widget.dart';
-//import '../widget/data_widget.dart';
 
 class ItemsScreen extends StatefulWidget {
   const ItemsScreen({Key? key}) : super(key: key);
@@ -47,17 +46,6 @@ class _ItemsScreenState extends State<ItemsScreen> {
           'https://4.imimg.com/data4/LL/TW/MY-33084776/men-s-shirt-500x500.jpg',
     ),
   ];
-  void onadd() {
-    setState(() {
-      ++value;
-    });
-  }
-
-  void onremove() {
-    setState(() {
-      --value;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +60,10 @@ class _ItemsScreenState extends State<ItemsScreen> {
             Expanded(
               child: ListView.builder(
                 itemCount: _items.length,
-                itemBuilder: (_, index) => ItemWidget(_items[index].title,
-                    _items[index].imgUrl, onadd, value, onremove),
+                itemBuilder: (_, index) => ItemWidget(
+                  _items[index].title,
+                  _items[index].imgUrl, //onadd, value, onremove
+                ),
               ),
             ),
           ],

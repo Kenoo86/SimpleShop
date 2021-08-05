@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ItemWidget extends StatelessWidget {
+class ItemWidget extends StatefulWidget {
   final String title;
   final String imgUrl;
-  final int value;
-  final Function onadd;
-  final Function onremove;
-  const ItemWidget(
-      this.title, this.imgUrl, this.onadd, this.value, this.onremove,
-      {Key? key})
-      : super(key: key);
 
+  const ItemWidget(this.title, this.imgUrl, {Key? key}) : super(key: key);
+
+  @override
+  _ItemWidgetState createState() => _ItemWidgetState();
+}
+
+class _ItemWidgetState extends State<ItemWidget> {
+  int value = 0;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,7 +30,7 @@ class ItemWidget extends StatelessWidget {
                   ),
                   title: Center(
                     child: Text(
-                      '${title}',
+                      '${widget.title}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -46,43 +47,53 @@ class ItemWidget extends StatelessWidget {
                   height: 10,
                 ),
                 Image.network(
-                  '${imgUrl}',
+                  '${widget.imgUrl}',
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FloatingActionButton(
-                      backgroundColor: Colors.white,
-                      mini: true,
-                      onPressed: () => onadd(),
-                      child: Icon(Icons.add),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '$value',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 30,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FloatingActionButton(
+                        backgroundColor: Colors.white,
+                        mini: true,
+                        onPressed: () => setState(() {
+                          value++;
+                        }),
+                        child: Icon(Icons.add),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    FloatingActionButton(
-                      backgroundColor: Colors.white,
-                      mini: true,
-                      onPressed: () => onremove(),
-                      child: Icon(
-                        Icons.remove,
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ],
+                      Text(
+                        '${value}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 30,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      FloatingActionButton(
+                        backgroundColor: Colors.white,
+                        mini: true,
+                        onPressed: () => setState(() {
+                          if (value != 0) {
+                            value--;
+                          }
+                          ;
+                        }),
+                        child: Icon(
+                          Icons.remove,
+                        ),
+                      ),
+                    ],
+                  ),
                 )
               ],
             )));
